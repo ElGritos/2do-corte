@@ -7,10 +7,6 @@ from Objetos.localidad import Localidad
 DIRECTORIO = './Basededatos/'
 
 def asegurar_directorio():
-    """ 
-    Verifica que la carpeta de la base de datos exista. 
-    Si no existe, la crea automáticamente.
-    """
     if not os.path.exists(DIRECTORIO):
         os.makedirs(DIRECTORIO)
 
@@ -23,7 +19,7 @@ def read_files():
     db_historial = []
 
     try:
-        with open(ruta_zonas, 'r', encoding='utf-8') as file:
+        with open(ruta_zonas, 'r') as file:
             datos_zonas = json.load(file)
             
             for nombre_municipio, lista_localidades in datos_zonas.items():
@@ -40,12 +36,12 @@ def read_files():
                 db_municipios.append(nuevo_municipio)
                 
     except FileNotFoundError:
-        print("Error crítico: No se encontró 'zonas_caracas.json' en la carpeta Basededatos.")
-        print("Por favor, asegúrate de colocar el archivo entregado por el profesor allí.")
+        print("No se encontro zonas_caracas.json en la carpeta Basededatos.")
+        print("Por favor asegurate de colocar el archivo entregado por el profesor alli.")
 
     try:
         if os.path.exists(ruta_historial):
-            with open(ruta_historial, 'r', encoding='utf-8') as file:
+            with open(ruta_historial, 'r') as file:
                 datos_historial = json.load(file)
                 
                 for reg in datos_historial:
@@ -63,3 +59,34 @@ def read_files():
         print(f"Hubo un problema leyendo el historial previo: {e}")
 
     return db_municipios, db_historial
+
+def guardar_historial(historial_consultas):
+    asegurar_directorio()
+    ruta_historial = os.path.join(DIRECTORIO, 'historial_consultas.json')
+    try:
+        with open(ruta_historial, 'w') as file:
+            file.write("[\n")
+            
+            for i, registro in enumerate(historial_consultas):
+                linea = (
+                    f'    {{'
+                    f'        "municipio": "{registro.municipio}",'
+                    f'        "localidad": "{registro.localidad}",'
+                    f'        "temperatura": {registro.temperatura},'
+                    f'        "humedad": {registro.humedad},'
+                    f'        "viento": {registro.viento},'
+                    f'        "clima": "{registro.clima}",'
+                    f'        "fecha_hora": "{registro.fecha_hora}"'
+                    f'    }}'
+                )
+                
+                if i < len(historial_consultas) - 1:
+                    linea += ","
+                linea += "\n"
+                file.write(linea)
+                
+            file.write("]\n")
+            
+        print("Historial guardado")
+    except Exception as e:
+        print(f"Error al intentar guardar el historial: {e}")

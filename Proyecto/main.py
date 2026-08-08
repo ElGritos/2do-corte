@@ -1,6 +1,11 @@
+from Modulos.manejodeinformacion import read_files
 class App:
     def __init__(self):
-        self.db_municipios = []
+        self.db_municipios = [] 
+        self.db_historial = []
+
+        self.db_municipios, self.db_historial = read_files()
+
 
     def run(self):
         print("Iniciando Sistema de Monitoreo del Clima - Caracas")
