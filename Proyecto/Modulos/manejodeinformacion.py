@@ -1,8 +1,8 @@
 import json
 import os 
-from Objetos.consulta import RegistroConsulta
-from Objetos.municipio import Municipio
-from Objetos.localidad import Localidad
+from Objetos.consulta import *
+from Objetos.municipio import *
+from Objetos.localidad import *
 
 DIRECTORIO = './Basededatos/'
 
@@ -10,7 +10,7 @@ def asegurar_directorio():
     if not os.path.exists(DIRECTORIO):
         os.makedirs(DIRECTORIO)
 
-def read_files(): 
+def read_files():
     asegurar_directorio()
     ruta_zonas = os.path.join(DIRECTORIO, 'zonas_caracas.json')
     ruta_historial = os.path.join(DIRECTORIO, 'historial_consultas.json')
@@ -19,7 +19,7 @@ def read_files():
     db_historial = []
 
     try:
-        with open(ruta_zonas, 'r') as file:
+        with open(ruta_zonas, 'r', encoding='utf-8') as file:
             datos_zonas = json.load(file)
             
             for nombre_municipio, lista_localidades in datos_zonas.items():
@@ -36,8 +36,7 @@ def read_files():
                 db_municipios.append(nuevo_municipio)
                 
     except FileNotFoundError:
-        print("No se encontro zonas_caracas.json en la carpeta Basededatos.")
-        print("Por favor asegurate de colocar el archivo entregado por el profesor alli.")
+        print("No se encontro zonas_caracas.json en la carpeta Basededatos")
 
     try:
         if os.path.exists(ruta_historial):
@@ -57,6 +56,7 @@ def read_files():
                     db_historial.append(consulta)
     except Exception as e:
         print(f"Hubo un problema leyendo el historial previo: {e}")
+        db_historial = []
 
     return db_municipios, db_historial
 
@@ -64,7 +64,7 @@ def guardar_historial(historial_consultas):
     asegurar_directorio()
     ruta_historial = os.path.join(DIRECTORIO, 'historial_consultas.json')
     try:
-        with open(ruta_historial, 'w') as file:
+        with open(ruta_historial, 'w', encoding='utf-8') as file:
             file.write("[\n")
             
             for i, registro in enumerate(historial_consultas):

@@ -1,15 +1,19 @@
-from Modulos.manejodeinformacion import read_files
+from Modulos.manejodeinformacion import *
 from Modulos.climaactual import *
 
 class App:
     def __init__(self):
         self.db_municipios = [] 
         self.historial_consultas = []
-        self.db_municipios, self.historial_consultas = read_files()
 
     def run(self):
         print("Iniciando Sistema de Monitoreo del Clima - Caracas")
+        self.db_municipios, self.historial_consultas = read_files()
 
+        if not self.db_municipios:
+            print("No se pudieron cargar los municipios")
+            return
+        
         while True:
             print('SISTEMA DE MONITOREO DEL CLIMA - CARACAS')
             option = input('''
@@ -37,6 +41,7 @@ class App:
                 print('Guardando datos de la sesion')
                 pass
                 print('Ha salido del sistema con exito')
+
                 break
             else:
                 print('Ingreso invalido, por favor intente de nuevo')
