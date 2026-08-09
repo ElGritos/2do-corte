@@ -1,11 +1,10 @@
 from Modulos.manejodeinformacion import read_files
+
 class App:
     def __init__(self):
         self.db_municipios = [] 
         self.db_historial = []
-
         self.db_municipios, self.db_historial = read_files()
-
 
     def run(self):
         print("Iniciando Sistema de Monitoreo del Clima - Caracas")
@@ -43,18 +42,17 @@ class App:
 
     def mostrar_reporte_carga(self):
         print('REPORTE DE CARGA DE DATOS')        
+
         for municipio in self.db_municipios:
             total_loc = len(municipio.localidades)
             con_coord = sum(1 for loc in municipio.localidades if loc.tiene_coordenadas())
             sin_coord = total_loc - con_coord
             porcentaje = (con_coord / total_loc * 100) if total_loc > 0 else 0
-            
             print(f"Municipio: {municipio.nombre}")
             print(f"a. Localidades cargadas: {total_loc}")
             print(f"b. Con coordenadas geográficas: {con_coord}")
             print(f"c. Sin coordenadas geográficas: {sin_coord}")
             print(f"d. Porcentaje con coordenadas: {porcentaje}%\n")
-            
         input("Presione enter para continuar")
 
 if __name__ == '__main__':
