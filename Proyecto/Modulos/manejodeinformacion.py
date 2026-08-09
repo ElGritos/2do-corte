@@ -68,17 +68,15 @@ def guardar_historial(historial_consultas):
             file.write("[\n")
             
             for i, registro in enumerate(historial_consultas):
-                linea = (
-                    f'    {{'
-                    f'        "municipio": "{registro.municipio}",'
-                    f'        "localidad": "{registro.localidad}",'
-                    f'        "temperatura": {registro.temperatura},'
-                    f'        "humedad": {registro.humedad},'
-                    f'        "viento": {registro.viento},'
-                    f'        "clima": "{registro.clima}",'
-                    f'        "fecha_hora": "{registro.fecha_hora}"'
-                    f'    }}'
-                )
+                linea = f"""    {{
+                        "municipio": "{registro.municipio}",
+                        "localidad": "{registro.localidad}",
+                        "temperatura": {registro.temperatura},
+                        "humedad": {registro.humedad},
+                        "viento": {registro.viento},
+                        "clima": "{registro.clima}",
+                        "fecha_hora": "{registro.fecha_hora}"
+                        }}"""
                 
                 if i < len(historial_consultas) - 1:
                     linea += ","

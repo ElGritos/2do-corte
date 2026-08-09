@@ -39,7 +39,7 @@ class App:
                 
             elif option == '5':
                 print('Guardando datos de la sesion')
-                pass
+                guardar_historial(self.historial_consultas)
                 print('Ha salido del sistema con exito')
 
                 break
