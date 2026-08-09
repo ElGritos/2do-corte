@@ -1,10 +1,11 @@
 from Modulos.manejodeinformacion import read_files
+from Modulos.climaactual import *
 
 class App:
     def __init__(self):
         self.db_municipios = [] 
-        self.db_historial = []
-        self.db_municipios, self.db_historial = read_files()
+        self.historial_consultas = []
+        self.db_municipios, self.historial_consultas = read_files()
 
     def run(self):
         print("Iniciando Sistema de Monitoreo del Clima - Caracas")
@@ -24,7 +25,7 @@ class App:
                 self.mostrar_reporte_carga()
                 
             elif option == '2':
-                pass
+                self.menu_clima_actual()
                 
             elif option == '3': 
                 pass
@@ -52,8 +53,28 @@ class App:
             print(f"a. Localidades cargadas: {total_loc}")
             print(f"b. Con coordenadas geográficas: {con_coord}")
             print(f"c. Sin coordenadas geográficas: {sin_coord}")
-            print(f"d. Porcentaje con coordenadas: {porcentaje}%\n")
+            print(f"d. Porcentaje con coordenadas: {porcentaje}%")
         input("Presione enter para continuar")
+
+    def menu_clima_actual(self):
+        while True:
+            print('CONSULTA DE CLIMA EN TIEMPO REAL')
+            option = input('''
+            Seleccione el método de búsqueda:
+            1. Buscar por Municipio y Localidad (Lista desplegable)
+            2. Búsqueda directa por nombre de Localidad
+            3. Volver al menú principal
+            >>> ''')
+            
+            if option == '1':
+                ejecutar_modulo_clima_actual(self.db_municipios, self.historial_consultas, modo="lista")
+            elif option == '2':
+                ejecutar_modulo_clima_actual(self.db_municipios, self.historial_consultas, modo="directa")
+            elif option == '3':
+                print('Regresando al menú principal')
+                break
+            else:
+                print('Ingreso inválido')
 
 if __name__ == '__main__':
     app = App()
