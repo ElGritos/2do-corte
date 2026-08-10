@@ -1,11 +1,29 @@
 [
     {
                         "municipio": "Chacao",
-                        "localidad": "Altamira",
-                        "temperatura": 24.7,
-                        "humedad": 92,
-                        "viento": 7.6,
-                        "clima": "Cielo despejado",
-                        "fecha_hora": "2026-08-08 23:53:10"
+                        "localidad": "La Castellana",
+                        "temperatura": 27.2,
+                        "humedad": 83,
+                        "viento": 7.5,
+                        "clima": "Mayormente despejado",
+                        "fecha_hora": "2026-08-09 19:32:09"
+                        },
+    {
+                        "municipio": "Libertador",
+                        "localidad": "El Valle",
+                        "temperatura": 28.7,
+                        "humedad": 79,
+                        "viento": 32.0,
+                        "clima": "Parcialmente nublado",
+                        "fecha_hora": "2026-08-09 19:32:29"
+                        },
+    {
+                        "municipio": "Baruta",
+                        "localidad": "Colinas de Bello Monte",
+                        "temperatura": 21.8,
+                        "humedad": 100,
+                        "viento": 3.8,
+                        "clima": "Nublado",
+                        "fecha_hora": "2026-08-09 19:40:04"
                         }
 ]

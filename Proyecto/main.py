@@ -61,7 +61,6 @@ class App:
             print(f"b. Con coordenadas geográficas: {con_coord}")
             print(f"c. Sin coordenadas geográficas: {sin_coord}")
             print(f"d. Porcentaje con coordenadas: {porcentaje}%")
-        input("Presione enter para continuar")
 
     def menu_clima_actual(self):
         while True:
@@ -96,8 +95,6 @@ class App:
             print(f"   b. Con coordenadas geograficas: {con_coord}")
             print(f"   c. Sin coordenadas geograficas: {sin_coord}")
             print(f"   d. Porcentaje con coordenadas: {porcentaje}%\n")
-            
-        input("Presione enter para continuar")
 
     def menu_clima_actual(self):
         while True:
