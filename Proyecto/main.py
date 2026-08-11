@@ -1,14 +1,32 @@
+"""
+Modulo principal de la aplicacion.
+Este codigo inicializa la clase app. Nos da una interfaz 
+de linea de comandos con menus interactivos para acceder a los 
+distintos modulos del programa.
+"""
 from Modulos.manejodeinformacion import *
 from Modulos.climaactual import *
 from Modulos.estadistica import *
 from Modulos.historicos import *
 
 class App:
+    """
+    Clase principal que gestiona el estado y la navegación del sistema.
+    Variables:
+        db_municipios (Lista que almacena los objetos Municipio cargados)
+        historial_consultas (Lista que almacena el historial de consultas de la sesion).
+    """
     def __init__(self):
+        """Inicializa las estructuras de datos vacias para la aplicacion"""
         self.db_municipios = [] 
         self.historial_consultas = []
 
     def run(self):
+        """
+        Inicia la ejecucion del sistema.
+        Carga los datos iniciales desde los archivos locales y muestra el menu principal, 
+        manteniendo un bucle hasta que el usuario decida salir y guardar.
+        """
         print("Iniciando Sistema de Monitoreo del Clima - Caracas")
         self.db_municipios, self.historial_consultas = read_files()
 
@@ -49,6 +67,11 @@ class App:
                 print('Ingreso invalido, por favor intente de nuevo')
 
     def mostrar_reporte_carga(self):
+        """
+        Calcula y muestra la informacion de la base de datos
+        Por cada municipio detalla la cantidad de localidades, cuantas de
+        ellas poseen coordenadas geograficas validas y su porcentaje de cobertura.
+        """
         print('REPORTE DE CARGA DE DATOS')        
 
         for municipio in self.db_municipios:
@@ -63,6 +86,10 @@ class App:
             print(f"d. Porcentaje con coordenadas: {porcentaje}%")
 
     def menu_clima_actual(self):
+        """
+        Muestra el submenu para las consultas de clima en tiempo real
+        Permite al usuario elegir entre buscar mediante una navegación por municipio o por busqueda directa escribiendo el nombre.
+        """
         while True:
             print('CONSULTA DE CLIMA EN TIEMPO REAL')
             option = input('''
@@ -83,6 +110,10 @@ class App:
                 print('Ingreso inválido')
 
     def mostrar_reporte_carga(self):
+        """
+        Muestra el submenu para la generacion de reportes y estadisticas. Ofrece opciones para visualizar 
+        rankings y promedios de la sesion o para verificar la cobertura geografica (localidades sin coordenadas).
+        """
         print('REPORTE DE CARGA DE DATOS')        
         for municipio in self.db_municipios:
             total_loc = len(municipio.localidades)
@@ -97,6 +128,10 @@ class App:
             print(f"   d. Porcentaje con coordenadas: {porcentaje}%\n")
 
     def menu_clima_actual(self):
+        """
+        Muestra el submenu para las consultas de clima en tiempo real
+        Permite al usuario elegir entre buscar mediante una navegacion por municipio o por busqueda directa escribiendo el nombre
+        """
         while True:
             print('CONSULTA DE CLIMA EN TIEMPO REAL')
             option = input('''
@@ -117,6 +152,11 @@ class App:
                 print('Ingreso invalido')
 
     def menu_estadisticas(self):
+        """
+        Muestra el submenu para la generacion de reportes y estadisticas.
+        Ofrece opciones para ver rankings y promedios de la sesion,
+        o para verificar la cobertura geografica (localidades sin coordenadas).
+        """
         while True:
             print('MODULO DE REPORTES Y ESTADISTICAS')
             option = input('''
@@ -137,6 +177,11 @@ class App:
                 print('Ingreso invalido')
 
     def menu_historico(self):
+        """
+        Ejecuta lavisualizacion de datos historicos y graficos
+        Inicia buscando la localidad deseada y luego transfiere el control
+        al modulo de historicos para consultar la api y generar los graficos.
+        """
         print('CONSULTA DE DATOS HISTORICOS Y GRAFICOS')
         mun_obj, loc_obj = buscar_localidad(self.db_municipios)
         if loc_obj:
@@ -146,4 +191,4 @@ class App:
 if __name__ == '__main__':
     app = App()
     app.run()
-
+    
