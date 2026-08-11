@@ -1,3 +1,10 @@
+"""
+Modulo para la consulta del clima en tiempo real, dicho módulo se encarga de interactuar 
+con el usuario para buscar localidades tanto por navegación como búsqueda directa,
+tambien consulta la api para obtener los datos meteorológicos actuales y registrar 
+dicha consulta en el historial de la sesión
+"""
+
 import requests
 from datetime import datetime
 from Objetos.consulta import RegistroConsulta
@@ -50,7 +57,6 @@ def buscar_localidad_por_nombre(db_municipios):
     """
     Busca localidades parecidas al texto que metio el usuario
     Recorre la lista de municipios y localidades y filtra aquellas que contengan el texto de busqueda y posean coordenadas validas
-    Garantiza tolerancia a fallos
     Parametros: db_municipios
     Retorna: municipio_seleccionado y localidad_seleccionada (None si el usuario ingresa datos invalidos)
     """
@@ -90,7 +96,7 @@ def buscar_localidad_por_nombre(db_municipios):
 
 def interpretar_codigo_clima(codigo):
     """
-    Traduce el codigo de la api a una descripcion en texto
+    Traduce el codigo de la api a texto entendible para el usuario
     Aporta adecuacion y exactitud al programa dando descripciones al usuario final en lugar de mostrar datos de la api
     Parametros: codigo (variable entera)
     Retorna: un string (Descripción del clima)

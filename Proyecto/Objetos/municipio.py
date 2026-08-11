@@ -1,5 +1,5 @@
 """
-Modulo que define la entidad Municipio.
+Modulo que define la entidad municipio
 """
 class Municipio:
     """
@@ -19,4 +19,3 @@ class Municipio:
             localidad (Localidad): Objeto de tipo Localidad que se desea vincular al municipio
         """
         self.localidades.append(localidad)
-        

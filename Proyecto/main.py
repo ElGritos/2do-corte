@@ -109,48 +109,6 @@ class App:
             else:
                 print('Ingreso inválido')
 
-    def mostrar_reporte_carga(self):
-        """
-        Muestra el submenu para la generacion de reportes y estadisticas. Ofrece opciones para visualizar 
-        rankings y promedios de la sesion o para verificar la cobertura geografica (localidades sin coordenadas).
-        """
-        print('REPORTE DE CARGA DE DATOS')        
-        for municipio in self.db_municipios:
-            total_loc = len(municipio.localidades)
-            con_coord = sum(1 for loc in municipio.localidades if loc.tiene_coordenadas())
-            sin_coord = total_loc - con_coord
-            porcentaje = (con_coord / total_loc * 100) if total_loc > 0 else 0
-            
-            print(f"   Municipio: {municipio.nombre}")
-            print(f"   a. Localidades cargadas: {total_loc}")
-            print(f"   b. Con coordenadas geograficas: {con_coord}")
-            print(f"   c. Sin coordenadas geograficas: {sin_coord}")
-            print(f"   d. Porcentaje con coordenadas: {porcentaje}%\n")
-
-    def menu_clima_actual(self):
-        """
-        Muestra el submenu para las consultas de clima en tiempo real
-        Permite al usuario elegir entre buscar mediante una navegacion por municipio o por busqueda directa escribiendo el nombre
-        """
-        while True:
-            print('CONSULTA DE CLIMA EN TIEMPO REAL')
-            option = input('''
-            Seleccione el metodo de busqueda:
-            1. Buscar por Municipio y Localidad 
-            2. Busqueda directa por nombre de Localidad
-            3. Volver al menu principal
-            >>> ''')
-            
-            if option == '1':
-                ejecutar_modulo_clima_actual(self.db_municipios, self.historial_consultas, modo="lista")
-            elif option == '2':
-                ejecutar_modulo_clima_actual(self.db_municipios, self.historial_consultas, modo="directa")
-            elif option == '3':
-                print('Regresando al menu principal')
-                break
-            else:
-                print('Ingreso invalido')
-
     def menu_estadisticas(self):
         """
         Muestra el submenu para la generacion de reportes y estadisticas.
@@ -191,4 +149,3 @@ class App:
 if __name__ == '__main__':
     app = App()
     app.run()
-    

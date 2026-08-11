@@ -1,3 +1,6 @@
+"""
+Modulo que define la entidad de localidad
+"""
 class Localidad:
     """
     Representa un punto geográfico especifico, sector o parroquia dentro de un municipio.

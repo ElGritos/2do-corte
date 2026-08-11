@@ -1,3 +1,9 @@
+"""
+Modulo para el manejo de información y persistencia de datos, se encarga de verificar la existencia 
+de los directorios necesarios, leer los archivos json locales y transformar dichos datos en
+listas de objetos guardandolos en el historial
+"""
+
 import json
 import os 
 from Objetos.consulta import *
@@ -100,3 +106,4 @@ def guardar_historial(historial_consultas):
         print("Historial guardado")
     except Exception as e:
         print(f"Error al intentar guardar el historial: {e}")
+

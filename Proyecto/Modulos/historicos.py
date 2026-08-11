@@ -25,33 +25,51 @@ class RegistroHistoricoDiario:
 
 class GrupoHistorico:
     """
-    Agrupa los registros historicos diarios bajo una etiqueta comun para calcular estadisticas.
+    Agrupa los registros historicos diarios bajo una etiqueta comun para calcular estadisticas
     Atributos:
         etiqueta (string nombre o identificador del grupo)
         registros (Lista de objetos RegistroHistoricoDiario)
     """
     def __init__(self, etiqueta):
+        """
+        Inicializa el grupo con su etiqueta y crea la lista vacia para los registros
+        """
         self.etiqueta = etiqueta
         self.registros = []
 
     def agregar_registro(self, registro_diario):
+        """
+        Agrega un nuevo registro diario a la lista interna del grupo
+        """
         self.registros.append(registro_diario)
 
     def prom_temp(self):
+        """
+        Calcula y retorna la temperatura promedio de todos los registros
+        """
         if not self.registros: return 0.0
         suma = sum(r.temperatura for r in self.registros if r.temperatura is not None)
         return suma / len(self.registros)
 
     def prom_hum(self):
+        """
+        Calcula y retorna el porcentaje de humedad promedio
+        """
         if not self.registros: return 0.0
         suma = sum(r.humedad for r in self.registros if r.humedad is not None)
         return suma / len(self.registros)
 
     def suma_prec(self):
+        """
+        Suma y retorna la precipitacion total acumulada en el grupo
+        """
         if not self.registros: return 0.0
         return sum(r.precipitacion for r in self.registros if r.precipitacion is not None)
 
     def prom_viento(self):
+        """
+        Calcula y retorna la velocidad promedio del viento
+        """
         if not self.registros: return 0.0
         suma = sum(r.viento for r in self.registros if r.viento is not None)
         return suma / len(self.registros)
