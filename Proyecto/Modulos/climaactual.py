@@ -53,7 +53,6 @@ def buscar_localidad_por_nombre(db_municipios):
     Garantiza tolerancia a fallos
     Parametros: db_municipios
     Retorna: municipio_seleccionado y localidad_seleccionada (None si el usuario ingresa datos invalidos)
-    
     """
     print("BUSQUEDA DIRECTA POR NOMBRE")
     termino = input("ingrese el nombre (o parte de el) de la localidad: ").strip().lower()

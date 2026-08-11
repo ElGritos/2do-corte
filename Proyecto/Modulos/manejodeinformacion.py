@@ -7,15 +7,19 @@ from Objetos.localidad import *
 DIRECTORIO = './Proyecto/Basededatos/'
 
 def asegurar_directorio():
-    """Verifica la existencia del directorio base para la base de datos y lo crea si no existe.
-    Esta funcion garantiza que las operaciones de lectura y escritura de archivos no fallen por falta de la carpeta de destino. Retorna:None"""
+    """
+    Verifica la existencia del directorio base para la base de datos y lo crea si no existe.
+    Esta funcion garantiza que las operaciones de lectura y escritura de archivos no fallen por falta de la carpeta de destino. Retorna:None
+    """
     if not os.path.exists(DIRECTORIO):
         os.makedirs(DIRECTORIO)
 
 def read_files():
-    """Lee los archivos de la base de datos, y transforma los datos en objetos (los archivos zonas_caracas.json y historial_consultas.json).
+    """
+    Lee los archivos de la base de datos, y transforma los datos en objetos (los archivos zonas_caracas.json y historial_consultas.json).
     Incluye manejo de excepciones para evitar el cierre abrupto del programa si los archivos no existen.
-    Retorna:db_municipios y db_historial (Lista de objetos con la informacion obtenida de la funcion)."""
+    Retorna:db_municipios y db_historial (Lista de objetos con la informacion obtenida de la funcion).
+    """
     asegurar_directorio()
     ruta_zonas = os.path.join(DIRECTORIO, 'zonas_caracas.json')
     ruta_historial = os.path.join(DIRECTORIO, 'historial_consultas.json')
@@ -70,7 +74,7 @@ def guardar_historial(historial_consultas):
     Guarda la lista de objetos de consultas recientes en un archivo (historial_consultas.json)
     Extrae los atributos de cada objeto RegistroConsulta en la lista recibida y escribe en el archivo historial_consultas.json. 
     Tiene manejo de errores para advertir al usuario en caso de fallos de escritura.
-    Parámetros: historial_consultas (Lista de objetos de tipo RegistroConsulta)
+    Parametros: historial_consultas (Lista de objetos)
     Retorna: None
     """
     asegurar_directorio()

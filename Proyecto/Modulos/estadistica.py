@@ -1,6 +1,19 @@
+"""
+Modulo para el calculo de estadisticas y auditoria de datos.
+
+Este modulo se encarga de procesar las consultas realizadas anteriormente
+durante la sesion para generar metricas promedio y records. Tambien verifica localidades que no tengan
+coordenadas validas en la base de datos.
+"""
 def calcular_estadisticas_consultas(historial):
+    """
+    Calcula y muestra estadisticas generales basadas en el historial de consultas
+    de la sesion actual. Muestra los promedios de temperatura, humedad y viento
+    y las localidades con la temperatura maxima y minima consultada.
+    Variables: historial (Lista de objetos de tipo RegistroConsulta)
+    """
     if not historial:
-        print("No hay suficientes datos estadísticos")
+        print("No hay suficientes datos estadisticos")
         print("Realiza algunas consultas de clima actual primero")
         return
 
@@ -36,8 +49,11 @@ def calcular_estadisticas_consultas(historial):
     print(f"Lugar más caluroso: Municipio {consulta_mas_calurosa.municipio}, Localidad {consulta_mas_calurosa.localidad} ({consulta_mas_calurosa.temperatura} °C)")
     print(f"Lugar más fresco: Municipio {consulta_mas_fresca.municipio}, Localidad {consulta_mas_fresca.localidad} ({consulta_mas_fresca.temperatura} °C)")
 
-
 def mostrar_localidades_sin_coordenadas(db_municipios):
+    """
+    Recorre la base de datos de municipios y sus localidades para ver aquellas que no tienen coordenadas (latitud y longitud) asignadas.
+    Variables: db_municipios (Lista de objetos de tipo Municipio)
+    """
     localidades_faltantes = []
 
     for municipio in db_municipios:
@@ -58,5 +74,12 @@ def mostrar_localidades_sin_coordenadas(db_municipios):
             print(f"   - {loc}")
             
 def ejecutar_modulo_estadisticas(historial, db_municipios):
+    """
+    Punto de entrada principal para el modulo de estadisticas
+    Ejecuta el calculo de estadisticas de la sesion y el reporte de datos faltantes.
+    Variables:
+        historial (list): Lista de objetos RegistroConsulta con el historial de la sesion.
+        db_municipios (list): Lista de objetos Municipio cargados en el sistema.
+    """
     calcular_estadisticas_consultas(historial)
     mostrar_localidades_sin_coordenadas(db_municipios)
